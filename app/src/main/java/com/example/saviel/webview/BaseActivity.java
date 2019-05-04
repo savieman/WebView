@@ -121,6 +121,7 @@ public class BaseActivity extends AppCompatActivity
     private void loadSubredditFragment(String subreddit) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_NONE);
         SubredditFragment subredditFragment = new SubredditFragment();
 
         Bundle bundle = new Bundle();
