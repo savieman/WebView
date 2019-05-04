@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private String programming = "/r/programming";
@@ -25,6 +28,7 @@ public class BaseActivity extends AppCompatActivity
     private String science = "/r/science";
     private String iAmA = "/r/iAmA";
     private String askScience = "/r/askscience";
+    private boolean onBackPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +55,19 @@ public class BaseActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else if(onBackPressed) {
             super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Press back again to exit the app", Toast.LENGTH_SHORT).show();
+            onBackPressed = true;
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    onBackPressed = false;
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(timerTask, 3000);
         }
     }
 
