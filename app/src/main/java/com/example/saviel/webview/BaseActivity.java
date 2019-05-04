@@ -1,11 +1,8 @@
 package com.example.saviel.webview;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -34,7 +31,7 @@ public class BaseActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        loadSubreddit();
+        loadSubredditFragment();
     }
 
     @Override
@@ -94,7 +91,7 @@ public class BaseActivity extends AppCompatActivity
         return true;
     }
 
-    private void loadSubreddit() {
+    private void loadSubredditFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SubredditFragment subredditFragment = new SubredditFragment();
