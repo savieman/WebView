@@ -11,9 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private String programming = "/r/programming";
+    private String programmerHumor = "/r/programmerhumor";
+    private String news = "/r/news";
+    private String theNetherlands = "/r/theNetherlands";
+    private String coolGuides = "/r/coolguides";
+    private String gaming = "/r/gaming";
+    private String juggling = "/r/juggling";
+    private String science = "/r/science";
+    private String iAmA = "/r/iAmA";
+    private String askScience = "/r/askscience";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +42,7 @@ public class BaseActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        loadSubredditFragment();
+        loadSubredditFragment(programming);
     }
 
     @Override
@@ -72,17 +83,33 @@ public class BaseActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.Programming) {
+            loadSubredditFragment(programming);
+        } else if (id == R.id.ProgrammerHumor) {
+            loadSubredditFragment(programmerHumor);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.News) {
+            loadSubredditFragment(news);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.TheNetherlands) {
+            loadSubredditFragment(theNetherlands);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.coolguides) {
+            loadSubredditFragment(coolGuides);
+        } else if (id == R.id.gaming) {
+            loadSubredditFragment(gaming);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.juggling) {
+            loadSubredditFragment(juggling);
+
+        } else if (id == R.id.science) {
+            loadSubredditFragment(science);
+
+        } else if (id == R.id.iama) {
+            loadSubredditFragment(iAmA);
+
+        } else if (id == R.id.askscience) {
+            loadSubredditFragment(askScience);
 
         }
 
@@ -91,10 +118,14 @@ public class BaseActivity extends AppCompatActivity
         return true;
     }
 
-    private void loadSubredditFragment() {
+    private void loadSubredditFragment(String subreddit) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SubredditFragment subredditFragment = new SubredditFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(SubredditFragment.SUBREDDIT, subreddit);
+        subredditFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.fragmentLayout, subredditFragment);
         fragmentTransaction.commit();

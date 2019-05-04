@@ -25,6 +25,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class SubredditFragment extends Fragment {
     private final static String redditURL = "http://reddit.com";
+    public final static String SUBREDDIT = "subreddit";
 
 
     public SubredditFragment() {
@@ -35,8 +36,11 @@ public class SubredditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subreddit, container, false);
+        Bundle bundle = this.getArguments();
+        String subreddit = bundle.getString(SUBREDDIT);
+
         WebView webView = view.findViewById(R.id.webview);
-        webView.loadUrl(redditURL);
+        webView.loadUrl(redditURL + subreddit);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
